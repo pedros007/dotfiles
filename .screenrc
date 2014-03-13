@@ -1,0 +1,46 @@
+# Inspired by
+# http://serverfault.com/questions/3740/what-are-useful-screenrc-settings
+
+# Don't display the copyright page
+startup_message off
+
+# tab-completion flash in heading bar
+vbell off
+
+# keep scrollback n lines
+defscrollback 1000
+
+# Wouldn't it be great if full-screen programs (emacs, etc) go away completely just like they do when you're not running screen?
+altscreen on
+
+# Source the ~/.bashrc
+shell -$SHELL
+
+# status bar
+hardstatus alwayslastline "%{b kw}%H %{r}%1` %{w}| %{g}%c %{w}| %{y}%m.%d.%Y %{w}| %{g}%l %{w}| %{-b kw}%u %-Lw%{= rW}%50> %n%f %t %{-}%+Lw%<"
+
+# switch to screens above 0-9
+bind  ! select 11
+bind  @ select 12
+bind \# select 13
+bind  $ select 14
+bind  % select 15
+bind \^ select 16
+bind  & select 17
+bind  * select 18
+bind  ( select 19
+bind  ) select 10
+
+
+# PREVIOUS WINDOW
+# Ctrl + Alt + Left from gnome-terminal
+bindkey ^[[1;7C prev 
+# Ctrl+Alt+Left from putty
+bindkey ^[^[[D prev
+
+
+# NEXT WINDOW
+# Ctrl + Alt + Right from gnome-terminal
+bindkey ^[[1;7D next
+# Ctrl+Alt+Right from putty
+bindkey ^[^[[C next

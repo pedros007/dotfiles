@@ -1,0 +1,6 @@
+[alias]
+	st = status
+	ci = commit
+[user]
+	name = Peter Schmitt
+	email = pschmitt@gmail.com
