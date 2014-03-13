@@ -4,11 +4,3 @@
 if [ -f ~/.bashrc ]; then
 	. ~/.bashrc
 fi
-
-if [ -f ~/.dg ]; then
-	. ~/.dg
-fi
-
-if [ -f ~/.randonnee ]; then
-	. ~/.randonnee
-fi
