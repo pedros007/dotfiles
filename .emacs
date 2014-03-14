@@ -3,6 +3,10 @@
 (set-face-foreground 'minibuffer-prompt "cyan")
 
 ; Extra modes
+; Interactively Do Things (Ido)
+(require 'ido)
+(ido-mode t)
+
 (add-to-list 'load-path "~/.emacs.d/modes")
 (require 'psvn)
 
