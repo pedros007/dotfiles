@@ -4,3 +4,5 @@
 [user]
 	name = Peter Schmitt
 	email = pschmitt@gmail.com
+[color]
+	ui = auto
