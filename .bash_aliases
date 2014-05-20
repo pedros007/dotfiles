@@ -1,4 +1,4 @@
-# -*- mode: bash -*-
+# -*- mode: sh -*-
 
 alias ls="ls --color=auto"
 alias l="ls -lhF"

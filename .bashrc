@@ -1,4 +1,4 @@
-# -*- mode: bash -*-
+# -*- mode: sh -*-
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like

@@ -2,6 +2,13 @@
 (global-set-key (kbd "C-c C-g") 'goto-line)
 (set-face-foreground 'minibuffer-prompt "cyan")
 
+; ELPA (aka package.el)
+(when (>= emacs-major-version 24)
+  (require 'package)
+  (package-initialize)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+  )
+
 ; Extra modes
 ; Interactively Do Things (Ido)
 (require 'ido)
@@ -9,6 +16,7 @@
 
 (add-to-list 'load-path "~/.emacs.d/modes")
 (require 'psvn)
+(require 'mapserver-mode)
 
 (add-to-list 'load-path "~/.emacs.d/modes/yaml-mode/")
 (require 'yaml-mode)
@@ -24,9 +32,9 @@
 (add-to-list 'auto-mode-alist '("\\.js.erb\\'" . javascript-mode))
 
 ; Python Jedi
-(add-hook 'python-mode-hook 'jedi:setup)
 (setq jedi:setup-keys t)                      ; optional
 (setq jedi:complete-on-dot t)                 ; optional
+(add-hook 'python-mode-hook 'jedi:setup)
 
 ; Restructured Text changes for black backgrounds:see:
 ; http://laclefyoshi.blogspot.com/2011/02/setting-syntax-coloring-for-rstel.html
