@@ -27,7 +27,9 @@ fi
 
 # disable stupid thing that makes C-s horrendously awkward in Konsole.
 # http://unix.stackexchange.com/questions/12107/how-to-unfreeze-after-accidentally-pressing-ctrl-s-in-a-terminal
-stty -ixon
+# With this uncomented, login shells will print out "stty: standard input: Invalid argument", which we dont want.  
+# Find more here: http://capistranorb.com/documentation/faq/why-does-something-work-in-my-ssh-session-but-not-in-capistrano/
+#stty -ixon
 
 # create patch between directories or files a,b:
 # diff -Naur a b
