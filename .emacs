@@ -55,3 +55,9 @@
  '(rst-level-4 ((t (:background "black" :foreground "red"))))
  '(rst-level-5 ((t (:background "black" :foreground "red"))))
  '(rst-level-6 ((t (:background "black" :foreground "red")))))
+
+;; Interpret ANSI color codes for a buffer: http://stackoverflow.com/a/23382008/40785
+(require 'ansi-color)
+(defun display-ansi-colors ()
+  (interactive)
+  (ansi-color-apply-on-region (point-min) (point-max)))
