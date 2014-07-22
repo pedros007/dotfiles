@@ -33,18 +33,22 @@
 (require 'yasnippet)
 (yas-global-mode 1)
 
+;; Yasnippet & auto-complete both use tab by default...
+;; Remove Yasnippet's default tab key binding
+(define-key yas-minor-mode-map (kbd "<tab>") nil)
+(define-key yas-minor-mode-map (kbd "TAB") nil)
+;; Set Yasnippet's key binding to shift+tab.
+(define-key yas-minor-mode-map (kbd "<backtab>") 'yas-expand)
+
 ; autocomplete is useful in a variety of situations.
 (require 'auto-complete-config)
 (ac-config-default)
-;;; set the trigger key so that it can work together with yasnippet on tab key,
-;;; if the word exists in yasnippet, pressing tab will cause yasnippet to
-;;; activate, otherwise, auto-complete will
-(ac-set-trigger-key "TAB")
-(ac-set-trigger-key "<tab>")
 
 ; JavaScript js2-mode and autocomplete
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-hook 'js-mode-hook 'js2-minor-mode)
 (add-hook 'js2-mode-hook 'ac-js2-mode)
+(setq ac-js2-evaluate-calls t)
 
 ; Python Jedi
 (setq jedi:setup-keys t)                      ; optional
