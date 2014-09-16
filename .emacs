@@ -8,6 +8,7 @@
   (package-initialize)
   (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
   )
+; With emacs-24.3.1, install: (yasnippet, yaml-mode, psvn, js2-mode, jedi-direx, jedi, ac-js2)
 
 ; Extra modes
 ; Interactively Do Things (Ido)
