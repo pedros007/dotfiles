@@ -8,12 +8,15 @@
   (package-initialize)
   (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
   )
-; With emacs-24.3.1, install: (yasnippet, yaml-mode, psvn, js2-mode, jedi-direx, jedi, ac-js2)
+; With emacs-24.3.1, install: (magit, yaml-mode, psvn, js2-mode, jedi-direx, jedi, ac-js2)
+; rope, flymake-cursor, flymake-ruby, flymake-yaml, flymake-shell, flymake-jshint
 
 ; Extra modes
 ; Interactively Do Things (Ido)
 (require 'ido)
 (ido-mode t)
+
+(add-hook 'sh-mode-hook 'flymake-shell-load)
 
 (add-to-list 'load-path "~/.emacs.d/modes")
 (require 'psvn)
@@ -22,6 +25,7 @@
 (add-to-list 'load-path "~/.emacs.d/modes/yaml-mode/")
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+(add-hook 'yaml-mode-hook 'flymake-yaml-load)
 
 (add-to-list 'load-path "~/.emacs.d/modes/ruby-mode/")
 (require 'ruby-mode)
@@ -30,16 +34,13 @@
 (add-to-list 'auto-mode-alist
 	     '("\\(Capfile\\|Gemfile\\(?:\\.[a-zA-Z0-9._-]+\\)?\\|[rR]akefile\\)\\'" . ruby-mode))
 
-; yasnippet by default reads from ~/.emacs.d/snippets
-(require 'yasnippet)
-(yas-global-mode 1)
+(require 'flymake-ruby)
+(add-hook 'ruby-mode-hook 'flymake-ruby-load)
+(global-set-key (kbd "C-c [") 'flymake-goto-prev-error)
+(global-set-key (kbd "C-c ]") 'flymake-goto-next-error)
+(global-set-key (kbd "C-c \\") 'flymake-display-err-menu-for-current-line)
 
-;; Yasnippet & auto-complete both use tab by default...
-;; Remove Yasnippet's default tab key binding
-(define-key yas-minor-mode-map (kbd "<tab>") nil)
-(define-key yas-minor-mode-map (kbd "TAB") nil)
-;; Set Yasnippet's key binding to shift+tab.
-(define-key yas-minor-mode-map (kbd "<backtab>") 'yas-expand)
+(add-hook 'ruby-mode-hook 'robe-mode)
 
 ; autocomplete is useful in a variety of situations.
 (require 'auto-complete-config)
@@ -49,7 +50,17 @@
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-hook 'js-mode-hook 'js2-minor-mode)
 (add-hook 'js2-mode-hook 'ac-js2-mode)
+(add-hook 'js2-mode-hook 'flymake-jshint-load)
 (setq ac-js2-evaluate-calls t)
+; do not use tabs for indent
+(setq js2-mode-hook
+  '(lambda () (progn
+    (set-variable 'indent-tabs-mode nil))))
+; proper indentation of js files: http://feeding.cloud.geek.nz/posts/proper-indentation-of-javascript-files/
+(custom-set-variables  
+ '(js2-basic-offset 2)  
+ '(js2-bounce-indent-p t)  
+)
 
 ; Python Jedi
 (setq jedi:setup-keys t)                      ; optional
