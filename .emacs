@@ -8,7 +8,7 @@
   (package-initialize)
   (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
   )
-; With emacs-24.3.1, install: (magit, yaml-mode, psvn, js2-mode, jedi-direx, jedi, ac-js2)
+; With emacs-24.3.1, install: (magit, yaml-mode, psvn, js2-mode, jedi-direx, jedi, ac-js2,
 ; rope, flymake-cursor, flymake-ruby, flymake-yaml, flymake-shell, flymake-jshint
 
 ; Extra modes
