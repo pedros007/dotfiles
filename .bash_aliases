@@ -1,8 +1,10 @@
 # -*- mode: sh -*-
 
-if [ `uname` == "Darwin" ]; then
+if [[ `uname` == 'Darwin' ]]; then
+    # OSX
     alias ls="ls -G"
 else
+    # Linux
     alias ls="ls --color=auto"
 fi
 alias l="ls -lhF"
