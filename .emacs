@@ -22,17 +22,10 @@
 (require 'psvn)
 (require 'mapserver-mode)
 
-(add-to-list 'load-path "~/.emacs.d/modes/yaml-mode/")
-(require 'yaml-mode)
-(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
-(add-hook 'yaml-mode-hook 'flymake-yaml-load)
-
-(add-to-list 'load-path "~/.emacs.d/modes/ruby-mode/")
-(require 'ruby-mode)
-(add-to-list 'auto-mode-alist
-	     '("\\.\\(?:gemspec\\|irbrc\\|gemrc\\|rake\\|rb\\|ru\\|thor\\)\\'" . ruby-mode))
-(add-to-list 'auto-mode-alist
-	     '("\\(Capfile\\|Gemfile\\(?:\\.[a-zA-Z0-9._-]+\\)?\\|[rR]akefile\\)\\'" . ruby-mode))
+; (add-to-list 'auto-mode-alist
+; 	     '("\\.\\(?:gemspec\\|irbrc\\|gemrc\\|rake\\|rb\\|ru\\|thor\\)\\'" . ruby-mode))
+; (add-to-list 'auto-mode-alist
+; 	     '("\\(Capfile\\|Gemfile\\(?:\\.[a-zA-Z0-9._-]+\\)?\\|[rR]akefile\\)\\'" . ruby-mode))
 
 (require 'flymake-ruby)
 (add-hook 'ruby-mode-hook 'flymake-ruby-load)
@@ -56,11 +49,11 @@
 (setq js2-mode-hook
   '(lambda () (progn
     (set-variable 'indent-tabs-mode nil))))
-; proper indentation of js files: http://feeding.cloud.geek.nz/posts/proper-indentation-of-javascript-files/
-(custom-set-variables  
- '(js2-basic-offset 2)  
- '(js2-bounce-indent-p t)  
-)
+;; proper indentation of js files: http://feeding.cloud.geek.nz/posts/proper-indentation-of-javascript-files/
+;(custom-set-variables  
+; '(js2-basic-offset 2)  
+; '(js2-bounce-indent-p t)  
+;)
 
 ; Python Jedi
 (setq jedi:setup-keys t)                      ; optional
@@ -92,3 +85,8 @@
 (defun display-ansi-colors ()
   (interactive)
   (ansi-color-apply-on-region (point-min) (point-max)))
+
+; magit diff with dark background terminals is very hard to read, so try this:
+; https://github.com/magit/magit/issues/865#issuecomment-24273819
+(eval-after-load 'magit
+  '(set-face-attribute 'magit-item-highlight () :bold t :background ()))
