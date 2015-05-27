@@ -1,15 +1,24 @@
 ; standard things
 (global-set-key (kbd "C-c C-g") 'goto-line)
-(set-face-foreground 'minibuffer-prompt "cyan")
 
 ; ELPA (aka package.el)
 (when (>= emacs-major-version 24)
-  (require 'package)
-  (package-initialize)
+  (require 'package)  
   (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+
+  ;; activate all the packages
+  (package-initialize)
+  ;; fetch the list of packages available
+  (unless package-archive-contents
+    (package-refresh-contents))
+  ;;Install packages which I want.
+  (setq my-required-packages 
+	'( magit yaml-mode psvn js2-mode jedi-direx jedi ac-js2 robe flymake-cursor flymake-ruby flymake-yaml flymake-shell flymake-jshint bundler rspec-mode))
+  ;;install the missing packages
+  (dolist (package my-required-packages)
+    (unless (package-installed-p package)
+      (package-install package)))
   )
-; With emacs-24.3.1, install: (magit, yaml-mode, psvn, js2-mode, jedi-direx, jedi, ac-js2,
-; rope, flymake-cursor, flymake-ruby, flymake-yaml, flymake-shell, flymake-jshint
 
 ; Extra modes
 ; Interactively Do Things (Ido)
@@ -21,11 +30,34 @@
 (add-to-list 'load-path "~/.emacs.d/modes")
 (require 'psvn)
 (require 'mapserver-mode)
+(require 'bundler)
+
+;; Lets go ahead and turn on yasnippet mode.
+(require 'yasnippet)
+(eval-after-load 'yasnippet
+  '(progn
+     (message "yas global mode")
+     (yas-global-mode 1)))
+
+(require 'rspec-mode)
+(eval-after-load 'rspec-mode
+  (rspec-install-snippets))
+;; Without this, rspec-mode cannot find bundler.
+(setq rspec-use-spring-when-possible nil)
+;; Scroll to the first test failure
+(setq compilation-scroll-output 'first-error)
 
 ; (add-to-list 'auto-mode-alist
 ; 	     '("\\.\\(?:gemspec\\|irbrc\\|gemrc\\|rake\\|rb\\|ru\\|thor\\)\\'" . ruby-mode))
-; (add-to-list 'auto-mode-alist
-; 	     '("\\(Capfile\\|Gemfile\\(?:\\.[a-zA-Z0-9._-]+\\)?\\|[rR]akefile\\)\\'" . ruby-mode))
+(add-to-list 'auto-mode-alist
+ 	     '("\\(Capfile\\|Gemfile\\(?:\\.[a-zA-Z0-9._-]+\\)?\\|[rR]akefile\\)\\'" . ruby-mode))
+
+(require 'auto-complete-config)
+(ac-config-default)
+;; Get auto-complete and yasnippet to play nicely: http://stackoverflow.com/a/25682651/40785
+(defun add-yasnippet-ac-sources ()
+  (add-to-list 'ac-sources 'ac-source-yasnippet))
+
 
 (require 'flymake-ruby)
 (add-hook 'ruby-mode-hook 'flymake-ruby-load)
@@ -34,10 +66,7 @@
 (global-set-key (kbd "C-c \\") 'flymake-display-err-menu-for-current-line)
 
 (add-hook 'ruby-mode-hook 'robe-mode)
-
-; autocomplete is useful in a variety of situations.
-(require 'auto-complete-config)
-(ac-config-default)
+(add-hook 'ruby-mode-hook 'add-yasnippet-ac-sources)
 
 ; JavaScript js2-mode and autocomplete
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
