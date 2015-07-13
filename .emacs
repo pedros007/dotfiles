@@ -1,5 +1,4 @@
-; standard things
-(global-set-key (kbd "C-c C-g") 'goto-line)
+(global-set-key (kbd "M-i") 'helm-imenu)
 
 ; ELPA (aka package.el)
 (when (>= emacs-major-version 24)
