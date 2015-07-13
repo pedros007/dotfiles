@@ -2,7 +2,9 @@
 	st = status
 	ci = commit
 [user]
-	name = Peter Schmitt
+	name = Pete Schmitt
 	email = pschmitt@gmail.com
 [color]
 	ui = auto
+[push]
+	default = simple
