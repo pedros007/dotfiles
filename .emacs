@@ -14,7 +14,7 @@
     (package-refresh-contents))
   ;;Install packages which I want.
   (setq my-required-packages 
-	'( magit yaml-mode psvn js2-mode jedi-direx jedi ac-js2 robe flymake-cursor flymake-ruby flymake-yaml flymake-shell flymake-jshint bundler rspec-mode))
+	'( magit yaml-mode psvn js2-mode jedi-direx jedi ac-js2 robe flymake-cursor flymake-ruby flymake-yaml flymake-shell flymake-jshint bundler rspec-mode helm))
   ;;install the missing packages
   (dolist (package my-required-packages)
     (unless (package-installed-p package)
@@ -25,6 +25,11 @@
 ; Interactively Do Things (Ido)
 (require 'ido)
 (ido-mode t)
+;; Flex matching: "wc" matches "widgets.c"
+(setq ido-enable-flex-matching t)
+
+; Emacs incremental completion and selection narrowing framework
+(require 'helm-config)
 
 (add-hook 'sh-mode-hook 'flymake-shell-load)
 
