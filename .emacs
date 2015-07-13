@@ -4,7 +4,8 @@
 ; ELPA (aka package.el)
 (when (>= emacs-major-version 24)
   (require 'package)  
-  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+  ;(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 
   ;; activate all the packages
   (package-initialize)
