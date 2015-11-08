@@ -39,7 +39,7 @@
 (add-to-list 'load-path "~/.emacs.d/modes")
 (require 'psvn)
 (require 'mapserver-mode)
-(require 'bundler)
+;; (require 'bundler)
 
 ;; Lets go ahead and turn on yasnippet mode.
 (require 'yasnippet)
@@ -52,7 +52,7 @@
 (eval-after-load 'rspec-mode
   (rspec-install-snippets))
 ;; Without this, rspec-mode cannot find bundler.
-(setq rspec-use-spring-when-possible nil)
+;;(setq rspec-use-spring-when-possible nil)
 ;; Scroll to the first test failure
 (setq compilation-scroll-output 'first-error)
 
