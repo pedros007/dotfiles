@@ -1,5 +1,3 @@
-(global-set-key (kbd "M-i") 'helm-imenu)
-
 ; ELPA (aka package.el)
 (when (>= emacs-major-version 24)
   (require 'package)  
@@ -35,9 +33,6 @@
 (ido-mode t)
 ;; Flex matching: "wc" matches "widgets.c"
 (setq ido-enable-flex-matching t)
-
-; Emacs incremental completion and selection narrowing framework
-(require 'helm-config)
 
 (add-hook 'sh-mode-hook 'flymake-shell-load)
 
