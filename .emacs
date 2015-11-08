@@ -13,15 +13,24 @@
     (package-refresh-contents))
   ;;Install packages which I want.
   (setq my-required-packages 
-	'( magit yaml-mode psvn js2-mode jedi-direx jedi ac-js2 robe flymake-cursor flymake-ruby flymake-yaml flymake-shell flymake-jshint bundler rspec-mode helm))
+	'( magit yaml-mode psvn js2-mode jedi-direx jedi ac-js2 robe flymake-cursor flymake-ruby flymake-yaml flymake-shell flymake-jshint rspec-mode org-mobile-sync yasnippet))
   ;;install the missing packages
   (dolist (package my-required-packages)
     (unless (package-installed-p package)
       (package-install package)))
   )
 
-; Extra modes
-; Interactively Do Things (Ido)
+;; Extra modes
+
+;; org-mode
+;; Set to the location of your Org files on your local system
+(setq org-directory "~/org/")
+;; Set to the name of the file where new notes will be stored
+(setq org-mobile-inbox-for-pull "~/org/flagged.org")
+;; Set to <your Dropbox root directory>/MobileOrg.
+(setq org-mobile-directory "~/Dropbox/Apps/MobileOrg/")
+
+;; Interactively Do Things (Ido)
 (require 'ido)
 (ido-mode t)
 ;; Flex matching: "wc" matches "widgets.c"
