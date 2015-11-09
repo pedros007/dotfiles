@@ -93,6 +93,9 @@
 ; '(js2-bounce-indent-p t)  
 ;)
 
+(add-to-list 'auto-mode-alist
+	     '("\\(js.erb\\)\\'". javascript-mode))
+
 ; Python Jedi
 (setq jedi:setup-keys t)                      ; optional
 (setq jedi:complete-on-dot t)                 ; optional
