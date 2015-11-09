@@ -11,7 +11,7 @@
     (package-refresh-contents))
   ;;Install packages which I want.
   (setq my-required-packages 
-	'( magit yaml-mode psvn js2-mode jedi-direx jedi ac-js2 robe flymake-cursor flymake-ruby flymake-yaml flymake-shell flymake-jshint rspec-mode org-mobile-sync yasnippet))
+	'( magit yaml-mode psvn js2-mode jedi-direx jedi ac-js2 robe flymake-cursor flymake-ruby flymake-yaml flymake-shell flymake-jshint rspec-mode org-mobile-sync yasnippet nginx-mode dockerfile-mode markdown-mode))
   ;;install the missing packages
   (dolist (package my-required-packages)
     (unless (package-installed-p package)
