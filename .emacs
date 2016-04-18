@@ -11,7 +11,7 @@
     (package-refresh-contents))
   ;;Install packages which I want.
   (setq my-required-packages 
-	'( magit yaml-mode psvn js2-mode jedi-direx jedi ac-js2 robe flymake-cursor flymake-ruby flymake-yaml flymake-shell flymake-jshint rspec-mode org-mobile-sync yasnippet nginx-mode dockerfile-mode markdown-mode))
+	'( magit yaml-mode psvn js2-mode jedi-direx jedi ac-js2 robe flymake-cursor flymake-ruby flymake-yaml flymake-shell flymake-jshint rspec-mode org-mobile-sync yasnippet nginx-mode dockerfile-mode markdown-mode go-mode go-autocomplete))
   ;;install the missing packages
   (dolist (package my-required-packages)
     (unless (package-installed-p package)
@@ -20,13 +20,19 @@
 
 ;; Extra modes
 
-;; org-mode
-;; Set to the location of your Org files on your local system
-(setq org-directory "~/org/")
-;; Set to the name of the file where new notes will be stored
-(setq org-mobile-inbox-for-pull "~/org/flagged.org")
-;; Set to <your Dropbox root directory>/MobileOrg.
-(setq org-mobile-directory "~/Dropbox/Apps/MobileOrg/")
+;; go-code
+(require 'go-autocomplete)
+(require 'auto-complete-config)
+(ac-config-default)
+
+(add-to-list 'load-path "~/src/go/src/github.com/dougm/goflymake")
+(require 'go-flymake)
+
+(require 'go-eldoc)
+(add-hook 'go-mode-hook 'go-eldoc-setup)
+(setq gofmt-command "goimports")
+(add-hook 'before-save-hook #'gofmt-before-save)
+
 
 ;; Interactively Do Things (Ido)
 (require 'ido)
@@ -38,7 +44,7 @@
 
 (add-to-list 'load-path "~/.emacs.d/modes")
 (require 'psvn)
-(require 'mapserver-mode)
+;;(require 'mapserver-mode)
 ;; (require 'bundler)
 
 ;; Lets go ahead and turn on yasnippet mode.
