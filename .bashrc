@@ -37,3 +37,7 @@ fi
 #vncserver :1 -geometry 1680x1050
 #xrandr -s 1680x1050
 #   \\===> see http://www.linuxquestions.org/questions/fedora-35/vncserver-not-using-geometry-setting-in-command-4175444307/
+
+export TERM=xterm-256color
+export GOPATH=$HOME/src/go
+export PATH=$PATH:$GOPATH/bin
