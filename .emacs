@@ -1,4 +1,3 @@
-; ELPA (aka package.el)
 (when (>= emacs-major-version 24)
   (require 'package)  
   (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
@@ -11,7 +10,7 @@
     (package-refresh-contents))
   ;;Install packages which I want.
   (setq my-required-packages 
-	'( magit yaml-mode psvn js2-mode jedi-direx jedi ac-js2 robe flymake-cursor flymake-ruby flymake-yaml flymake-shell flymake-jshint rspec-mode org-mobile-sync yasnippet nginx-mode dockerfile-mode markdown-mode go-mode go-autocomplete))
+	'( magit yaml-mode psvn js2-mode jedi-direx jedi ac-js2 robe flycheck org-mobile-sync nginx-mode dockerfile-mode markdown-mode go-mode go-autocomplete))
   ;;install the missing packages
   (dolist (package my-required-packages)
     (unless (package-installed-p package)
@@ -20,19 +19,18 @@
 
 ;; Extra modes
 
-;; go-code
+;; flycheck - a modern replacement for flymake
+(global-flycheck-mode)`
+
+;; go development
 (require 'go-autocomplete)
 (require 'auto-complete-config)
 (ac-config-default)
-
-(add-to-list 'load-path "~/src/go/src/github.com/dougm/goflymake")
-(require 'go-flymake)
 
 (require 'go-eldoc)
 (add-hook 'go-mode-hook 'go-eldoc-setup)
 (setq gofmt-command "goimports")
 (add-hook 'before-save-hook #'gofmt-before-save)
-
 
 ;; Interactively Do Things (Ido)
 (require 'ido)
@@ -40,54 +38,23 @@
 ;; Flex matching: "wc" matches "widgets.c"
 (setq ido-enable-flex-matching t)
 
-(add-hook 'sh-mode-hook 'flymake-shell-load)
-
 (add-to-list 'load-path "~/.emacs.d/modes")
-(require 'psvn)
+;;(require 'psvn)
 ;;(require 'mapserver-mode)
-;; (require 'bundler)
-
-;; Lets go ahead and turn on yasnippet mode.
-(require 'yasnippet)
-(eval-after-load 'yasnippet
-  '(progn
-     (message "yas global mode")
-     (yas-global-mode 1)))
-
-(require 'rspec-mode)
-(eval-after-load 'rspec-mode
-  (rspec-install-snippets))
-;; Without this, rspec-mode cannot find bundler.
-;;(setq rspec-use-spring-when-possible nil)
-;; Scroll to the first test failure
-(setq compilation-scroll-output 'first-error)
-
-; (add-to-list 'auto-mode-alist
-; 	     '("\\.\\(?:gemspec\\|irbrc\\|gemrc\\|rake\\|rb\\|ru\\|thor\\)\\'" . ruby-mode))
-(add-to-list 'auto-mode-alist
- 	     '("\\(Capfile\\|Gemfile\\(?:\\.[a-zA-Z0-9._-]+\\)?\\|[rR]akefile\\)\\'" . ruby-mode))
 
 (require 'auto-complete-config)
 (ac-config-default)
-;; Get auto-complete and yasnippet to play nicely: http://stackoverflow.com/a/25682651/40785
-(defun add-yasnippet-ac-sources ()
-  (add-to-list 'ac-sources 'ac-source-yasnippet))
 
 
-(require 'flymake-ruby)
-(add-hook 'ruby-mode-hook 'flymake-ruby-load)
-(global-set-key (kbd "C-c [") 'flymake-goto-prev-error)
-(global-set-key (kbd "C-c ]") 'flymake-goto-next-error)
-(global-set-key (kbd "C-c \\") 'flymake-display-err-menu-for-current-line)
-
+;; Ruby & Rails development
+(add-to-list 'auto-mode-alist
+ 	     '("\\(Capfile\\|Gemfile\\(?:\\.[a-zA-Z0-9._-]+\\)?\\|[rR]akefile\\)\\'" . ruby-mode))
 (add-hook 'ruby-mode-hook 'robe-mode)
-(add-hook 'ruby-mode-hook 'add-yasnippet-ac-sources)
 
 ; JavaScript js2-mode and autocomplete
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-hook 'js-mode-hook 'js2-minor-mode)
 (add-hook 'js2-mode-hook 'ac-js2-mode)
-(add-hook 'js2-mode-hook 'flymake-jshint-load)
 (setq ac-js2-evaluate-calls t)
 ; do not use tabs for indent
 (setq js2-mode-hook
