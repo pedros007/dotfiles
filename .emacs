@@ -9,7 +9,9 @@
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; Setup package manager & install packages I happen to like.
   (require 'package)  
-  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+  (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+			   ("marmalade" . "http://marmalade-repo.org/packages/")
+			   ("melpa" . "http://melpa.org/packages/"))) ;; See https://github.com/melpa/melpa/issues/4156 for a mirror: https://elpa.zilongshanren.com
 
   ;; activate all the packages
   (package-initialize)
