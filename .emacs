@@ -85,6 +85,11 @@
   (add-to-list 'auto-mode-alist
 	       '("\\(js.erb\\)\\'". javascript-mode))
 
+  ;; JSON editing
+    (setq json-mode-hook
+	'(lambda () (progn
+		      (set-variable 'indent-tabs-mode nil))))
+
   ;; Python development
   (setq jedi:setup-keys t)                      ; optional
   (setq jedi:complete-on-dot t)                 ; optional
