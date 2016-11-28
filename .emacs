@@ -18,7 +18,7 @@
     (package-refresh-contents))
   ;;Install packages which I want.
   (setq my-required-packages 
-	'( magit yaml-mode js2-mode ac-js2 robe jedi-direx jedi flycheck nginx-mode dockerfile-mode markdown-mode go-mode go-autocomplete))
+	'( magit yaml-mode js2-mode ac-js2 robe jedi-direx jedi flycheck nginx-mode dockerfile-mode markdown-mode go-mode go-guru go-autocomplete))
   ;;install the missing packages
   (dolist (package my-required-packages)
     (unless (package-installed-p package)
@@ -58,6 +58,8 @@
   (require 'go-autocomplete)
   (require 'auto-complete-config)
   (ac-config-default)
+
+  (add-hook  'go-mode-hook 'go-guru-hl-identifier-mode)
 
   (require 'go-eldoc)
   (add-hook 'go-mode-hook 'go-eldoc-setup)
