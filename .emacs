@@ -39,6 +39,10 @@
   ;; Flex matching: "wc" matches "widgets.c"
   (setq ido-enable-flex-matching t)
 
+  ;; EditorConfig https://github.com/editorconfig/editorconfig-emacs
+  (require 'editorconfig)
+  (editorconfig-mode 1)
+
   ;; Autocomplete
   (require 'auto-complete-config)
   (ac-config-default)
@@ -72,6 +76,10 @@
   (add-to-list 'auto-mode-alist
 	       '("\\(Capfile\\|Gemfile\\(?:\\.[a-zA-Z0-9._-]+\\)?\\|[rR]akefile\\)\\'" . ruby-mode))
   (add-hook 'ruby-mode-hook 'robe-mode)
+
+  ;; jsx
+  (add-to-list 'auto-mode-alist '("\\.jsx\\'" . jsx-mode))
+  (autoload 'jsx-mode "jsx-mode" "JSX mode" t)
 
   ;; JavaScript development
   (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
