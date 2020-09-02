@@ -8,7 +8,7 @@
 (when (>= emacs-major-version 24)
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; Setup package manager & install packages I happen to like.
-  (require 'package)  
+  (require 'package)
   (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
 			   ("marmalade" . "http://marmalade-repo.org/packages/")
 			   ("melpa" . "http://melpa.org/packages/"))) ;; See https://github.com/melpa/melpa/issues/4156 for a mirror: https://elpa.zilongshanren.com
@@ -19,7 +19,7 @@
   (unless package-archive-contents
     (package-refresh-contents))
   ;;Install packages which I want.
-  (setq my-required-packages 
+  (setq my-required-packages
 	'( magit yaml-mode js2-mode ac-js2 robe jedi-direx jedi flycheck nginx-mode dockerfile-mode markdown-mode go-mode go-guru go-autocomplete))
   ;;install the missing packages
   (dolist (package my-required-packages)
@@ -92,6 +92,9 @@
 		      (set-variable 'indent-tabs-mode nil))))
   (add-to-list 'auto-mode-alist
 	       '("\\(js.erb\\)\\'". javascript-mode))
+  ;; two spaces for indent (default seems to be 4)
+  (setq js-indent-level 2)
+  (add-hook 'js2-mode-hook 'prettier-js-mode)
 
   ;; JSON editing
     (setq json-mode-hook
@@ -99,7 +102,25 @@
 		      (set-variable 'indent-tabs-mode nil))))
 
   ;; Python development
+  ;; jedi
+  (setq jedi:environment-virtualenv (list "python3" "-m" "venv"))
   (setq jedi:setup-keys t)                      ; optional
   (setq jedi:complete-on-dot t)                 ; optional
+  ;; https://aliquote.org/post/emacs-python3/
+  (setq flycheck-python-pycompile-executable "python3")
   (add-hook 'python-mode-hook 'jedi:setup)
   )
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (prettier-js yaml-mode robe psvn org nginx-mode markdown-mode magit logstash-conf jsx-mode json-mode jinja2-mode jedi-direx go-guru go-eldoc go-autocomplete flymake-easy flycheck editorconfig dockerfile-mode bundler ac-js2))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
