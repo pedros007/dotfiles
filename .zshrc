@@ -75,16 +75,35 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
+export PATH=/Users/pschmitt/opt/gdal/bin:$PATH
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
+export EDITOR="emacs"
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
 # else
 #   export EDITOR='mvim'
 # fi
+
+# Eternal bash history:
+# ---------------------
+# https://gist.github.com/rebeccacremona/88fc768fb487e80335febbfa31d6251a
+# No dupes
+export HISTCONTROL=ignoreboth:erasedups
+# Undocumented feature which sets the size to "unlimited".
+# http://stackoverflow.com/questions/9457233/unlimited-bash-history
+export HISTFILESIZE=
+export HISTSIZE=
+export HISTTIMEFORMAT="%F %T "
+# Change the file location because certain bash sessions truncate .zsh_history file upon close.
+# http://superuser.com/questions/575479/bash-history-truncated-to-500-lines-on-each-login
+export HISTFILE=~/.zsh_eternal_history
+# Force prompt to write history after every command.
+# http://superuser.com/questions/20900/bash-history-loss
+PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -97,3 +116,5 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias emacs='emacsclient -a "" -nw'
+alias em="emacs"
