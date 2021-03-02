@@ -41,4 +41,5 @@ fi
 export TERM=xterm-256color
 export GOPATH=$HOME/src/go
 export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$HOME/.local/bin
 export PATH=/Users/pschmitt/opt/gdal/bin:$PATH
