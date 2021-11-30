@@ -5,4 +5,4 @@ Editor and shell settings inspired by http://dotfiles.github.io/
 
 Install via:
 
-    for df in $HOME/dotfiles/.[a-zA-Z0-9]*; do ln -s $df $HOME/`basename $HOME/$df`; done
+    find ~/dotfiles -type f -name '\.*' -maxdepth 1 -print  | grep -v "~" | xargs -I {} echo ln -s {} $HOME/`basename $HOME/{}`
