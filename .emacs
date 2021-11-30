@@ -19,7 +19,7 @@
     (package-refresh-contents))
   ;;Install packages which I want.
   (setq my-required-packages
-	'( magit yaml-mode js2-mode ac-js2 robe jedi-direx jedi flycheck nginx-mode dockerfile-mode markdown-mode go-mode go-eldoc go-guru go-autocomplete editorconfig))
+	'( magit yaml-mode js2-mode ac-js2 robe jedi-direx jedi flycheck cmake-mode nginx-mode dockerfile-mode markdown-mode go-mode go-eldoc go-guru go-autocomplete editorconfig))
   ;;install the missing packages
   (dolist (package my-required-packages)
     (unless (package-installed-p package)
@@ -115,7 +115,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(git-link prettier-js yaml-mode robe psvn org nginx-mode markdown-mode magit logstash-conf jsx-mode json-mode jinja2-mode jedi-direx go-guru go-eldoc go-autocomplete flymake-easy flycheck editorconfig dockerfile-mode bundler ac-js2)))
+   '(cmake-mode git-link prettier-js yaml-mode robe psvn org nginx-mode markdown-mode magit logstash-conf jsx-mode json-mode jinja2-mode jedi-direx go-guru go-eldoc go-autocomplete flymake-easy flycheck editorconfig dockerfile-mode bundler ac-js2)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
