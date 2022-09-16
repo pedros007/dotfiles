@@ -113,8 +113,7 @@ export EDITOR="emacs"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias emacs='emacsclient -a "" -nw'
-alias em="emacs"
+alias em='emacsclient -a "" -nw'
 
 eval "$(nodenv init -)"
 eval "$(pyenv init --path)"
