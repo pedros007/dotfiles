@@ -1,3 +1,9 @@
+# aws session manager plugin loses its mind with ^y without this See
+# https://github.com/aws/session-manager-plugin/issues/29#issuecomment-1380621749
+# Unset "delayed suspend" so that AWS SSM session-manager-plugin
+# doesn't exit on Ctrl+Y (see 'stty -a' output)
+stty dsusp undef
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
