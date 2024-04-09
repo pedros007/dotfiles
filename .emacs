@@ -19,7 +19,7 @@
     (package-refresh-contents))
   ;;Install packages which I want.
   (setq my-required-packages
-	'( magit yaml-mode js2-mode ac-js2 robe jedi-direx jedi flycheck cmake-mode nginx-mode dockerfile-mode markdown-mode go-mode go-eldoc go-guru go-autocomplete editorconfig))
+	'( magit yaml-mode prettier-js js2-mode ac-js2 robe jedi-direx jedi flycheck cmake-mode nginx-mode dockerfile-mode markdown-mode go-mode go-eldoc go-guru go-autocomplete editorconfig))
   ;;install the missing packages
   (dolist (package my-required-packages)
     (unless (package-installed-p package)
@@ -89,11 +89,12 @@
   (setq js2-mode-hook
 	'(lambda () (progn
 		      (set-variable 'indent-tabs-mode nil))))
-  (add-to-list 'auto-mode-alist
-	       '("\\(js.erb\\)\\'". javascript-mode))
-  ;; two spaces for indent (default seems to be 4)
-  (setq js-indent-level 2)
   (add-hook 'js2-mode-hook 'prettier-js-mode)
+
+  ;; Make case switch statements indent how prettier wants. https://stackoverflow.com/q/8985523/40785
+  (add-hook 'prettier-js-mode-hook
+	    (lambda ()
+	      (setq js-switch-indent-offset 2)))
 
   ;; JSON editing
     (setq json-mode-hook
